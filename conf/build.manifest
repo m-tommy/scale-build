@@ -84,6 +84,7 @@ base-packages:
 - ifstat
 - nvidia-kernel-dkms
 - nslcd
+- apt-cacher-ng
 - nvidia-container-toolkit
 - nvidia-smi
 - openzfs
@@ -105,6 +106,12 @@ base-packages:
 - openzfs-zfs-modules-dbg
 - openzfs-zfs-test
 - openzfs-zfs-initramfs
+- build-essential
+- locales
+- debootstrap
+- xorriso
+- squashfs-tools
+- unzip
 - nvme-cli
 - convmv
 
