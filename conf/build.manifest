@@ -257,7 +257,7 @@ sources:
   repo: https://github.com/truenas/pyglfs.git
 - name: kernel
   repo: https://github.com/truenas/linux
-  branch: truenas/linux-5.15
+  branch: NAS-119367
   batch_priority: 0
   env:
     CONFIG_DEBUG_INFO: "Y"
@@ -270,10 +270,7 @@ sources:
     - "make defconfig"
     - "./scripts/kconfig/merge_config.sh .config scripts/package/truenas/debian_amd64.config"
     - "./scripts/kconfig/merge_config.sh .config scripts/package/truenas/truenas.config"
-    - env_checks:
-        - key: DEBUG_KERNEL
-          value: true
-      command: "./scripts/kconfig/merge_config.sh .config scripts/package/truenas/debug.config"
+    - "./scripts/kconfig/merge_config.sh .config scripts/package/truenas/debug.config"
     - env_checks:
         - key: EXTRA_KERNEL_CONFIG
           value: true
