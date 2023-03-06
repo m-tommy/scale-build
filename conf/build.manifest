@@ -265,7 +265,7 @@ sources:
   repo: https://github.com/truenas/pyglfs.git
 - name: kernel
   repo: https://github.com/truenas/linux
-  branch: stable/bluefin
+  branch: NAS-120160
   batch_priority: 0
   env:
     CONFIG_DEBUG_INFO: "Y"
@@ -350,7 +350,7 @@ sources:
     - openzfs
 - name: truenas_binaries
   repo: https://github.com/truenas/binaries
-  branch: stable/bluefin
+  branch: new-binaries
 - name: truenas_webui
   repo: https://github.com/truenas/webui
   prebuildcmd:
