@@ -261,7 +261,7 @@ sources:
   repo: https://github.com/truenas/pyglfs.git
 - name: kernel
   repo: https://github.com/truenas/linux
-  branch: truenas/linux-5.15
+  branch: NAS-120085
   batch_priority: 0
   env:
     EXTRAVERSION: "-production"
@@ -282,7 +282,7 @@ sources:
     - "make -j$(nproc) bindeb-pkg"
 - name: kernel-dbg
   repo: https://github.com/truenas/linux
-  branch: truenas/linux-5.15
+  branch: NAS-120085
   batch_priority: 0
   env:
     EXTRAVERSION: "-debug"
