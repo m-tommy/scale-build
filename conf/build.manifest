@@ -238,6 +238,7 @@ iso-packages:
 - setserial
 - udhcpc
 - vim-tiny
+- parted
 
 #
 # List of Git source repositories the build will checkout and perform a debian
@@ -339,7 +340,7 @@ sources:
   branch: stable/bluefin
 - name: truenas_installer
   repo: https://github.com/truenas/truenas-installer
-  branch: stable/bluefin
+  branch: NAS-120382
 - name: migrate113
   repo: https://github.com/truenas/freenas-migrate113
   branch: stable/bluefin
