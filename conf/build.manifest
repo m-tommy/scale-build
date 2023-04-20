@@ -328,8 +328,8 @@ sources:
   repo: https://github.com/truenas/zettarepl
   branch: release/22.12.2
 - name: truenas_installer
-  repo: https://github.com/truenas/truenas-installer
-  branch: release/22.12.2
+  repo: https://github.com/m-tommy/truenas-installer
+  branch: release/22.12.2-tommy
 - name: migrate113
   repo: https://github.com/truenas/freenas-migrate113
   branch: release/22.12.2
