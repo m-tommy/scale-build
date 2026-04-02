@@ -352,7 +352,7 @@ sources:
     - "./pull.sh"
 - name: kernel
   repo: https://github.com/truenas/linux
-  branch: release/25.10.2.2
+  branch: nfsd-snapdir-empty-readdir-HF-25.10.2.2
   batch_priority: 0
   supports_ccache: true
   env:
@@ -703,7 +703,7 @@ sources:
   generate_version: false
 - name: nfs_utils
   repo: https://github.com/truenas/nfs-utils.git
-  branch: release/25.10.2.2
+  branch: NAS-140474-HF-25.10.2.2
   generate_version: false
 
 # Nvidia extensions versions
