@@ -1,0 +1,13 @@
+--- ./sources/kernel/drivers/scsi/mpt3sas/mpt3sas_base.c	2026-04-05 17:39:18.809970070 +0200
++++ ./patched/kernel/drivers/scsi/mpt3sas/mpt3sas_base.c	2026-04-05 17:36:57.000000000 +0200
+@@ -1359,6 +1359,10 @@
+ 	if (log_info == 0x31170000)
+ 		return;
+ 
++	/* eat the loginfos caused by storcli */
++	if (log_info == 0x300301e1)
++		return;
++
+ 	/* eat the loginfos associated with task aborts */
+ 	if (ioc->ignore_loginfos && (log_info == 0x30050000 || log_info ==
+ 	    0x31140000 || log_info == 0x31130000))

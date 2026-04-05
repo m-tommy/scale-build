@@ -30,9 +30,16 @@ class BootstrapDir(CacheMixin, HashMixin):
 
     def debootstrap_debian(self):
         manifest = get_manifest()
+        # Debootstrap needs binary format key, convert ASCII-armored to binary
+        keyring_path = os.path.join(BUILDER_DIR, 'keys/truenas.gpg')
+        binary_keyring = '/tmp/truenas-binary.gpg'
+
+        # Convert ASCII-armored key to binary format for debootstrap
+        run(['sh', '-c', f'gpg --dearmor < {keyring_path} > {binary_keyring}'])
+
         run(
             ['debootstrap'] + self.deopts + [
-                '--keyring', '/etc/apt/trusted.gpg.d/debian-archive-truenas-automatic.gpg',
+                '--keyring', binary_keyring,
                 manifest['debian_release'],
                 self.chroot_basedir, get_apt_repos(check_custom=True)['url']
             ]
@@ -147,9 +154,16 @@ class RootfsBootstrapDir(BootstrapDir):
 
     def debootstrap_debian(self):
         manifest = get_manifest()
+        # Debootstrap needs binary format key, convert ASCII-armored to binary
+        keyring_path = os.path.join(BUILDER_DIR, 'keys/truenas.gpg')
+        binary_keyring = '/tmp/truenas-binary.gpg'
+
+        # Convert ASCII-armored key to binary format for debootstrap
+        run(['sh', '-c', f'gpg --dearmor < {keyring_path} > {binary_keyring}'])
+
         run(
             ['debootstrap'] + self.deopts + [
-                '--foreign', '--keyring', '/etc/apt/trusted.gpg.d/debian-archive-truenas-automatic.gpg',
+                '--foreign', '--keyring', binary_keyring,
                 manifest['debian_release'],
                 self.chroot_basedir, get_apt_repos(check_custom=True)['url']
             ]
