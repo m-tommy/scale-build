@@ -1,6 +1,7 @@
 import contextlib
 import json
 import os
+from pathlib import Path
 import shlex
 import shutil
 
@@ -74,6 +75,11 @@ class BuildPackageMixin:
 
     def _build_impl(self):
         shutil.copytree(self.source_path, self.source_in_chroot, dirs_exist_ok=True, symlinks=True)
+
+        # BEGIN Copy patches, from the main repo
+        self._copy_local_patches()
+        # END
+
         if os.path.exists(os.path.join(self.dpkg_overlay_packages_path, 'Packages.gz')):
             self.run_in_chroot('apt update')
 
@@ -135,6 +141,33 @@ class BuildPackageMixin:
             f.write(self.source_hash)
 
         self.delete_overlayfs()
+
+    # BEGIN
+    def _copy_local_patches(self):
+        patches_root = Path(self.source_path).parent.parent / 'patches'
+        if not patches_root.is_dir():
+            self.logger.debug('No local patches root found at %s', patches_root)
+            return
+        src = patches_root / self.name
+        if not src.is_dir():
+            self.logger.debug('No local patches found for %s at %s', self.name, src)
+            return
+        dst = Path(self.source_in_chroot) / 'scale-build-patches'
+        if dst.exists():
+            raise CallError(
+                f'scale-build-patches/ already exists in source tree for {self.name}. '
+                f'Refusing to overwrite.'
+            )
+        # shutil.copytree(str(src), str(dst))
+        # keep file metadata too
+        shutil.copytree(str(src), str(dst), copy_function=shutil.copy2)
+
+        script_src = patches_root / 'apply-local-patches.sh'
+        if script_src.exists():
+            shutil.copy2(str(script_src), str(dst / 'apply-local-patches.sh'))
+
+        self.logger.debug('Copied local patches for %s from %s into %s', self.name, str(src), str(dst))
+    # END
 
     def execute_pre_depends_commands(self):
         for predep_entry in self.predepscmd:
