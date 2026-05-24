@@ -374,6 +374,7 @@ sources:
     - "make syncconfig"
     - "make archprepare"
     - "./scripts/package/mkdebian"
+    - "./scale-build-patches/apply-local-patches.sh direct"
   buildcmd:
     - "rm -rf .config.old"
     - "make -j$(nproc) bindeb-pkg"
@@ -395,6 +396,7 @@ sources:
         - "make syncconfig"
         - "make archprepare"
         - "./scripts/package/mkdebian"
+        - "./scale-build-patches/apply-local-patches.sh direct"
       buildcmd:
         - "rm -rf .config.old"
         - "make -j$(nproc) bindeb-pkg"
