@@ -352,7 +352,7 @@ sources:
     - "./pull.sh"
 - name: kernel
   repo: https://github.com/truenas/linux
-  branch: release/25.10.6
+  branch: kernel-update-6.12
   batch_priority: 0
   supports_ccache: true
   env:
